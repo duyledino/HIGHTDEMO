@@ -53,3 +53,17 @@ btn[0].addEventListener("click",()=>{
     setTimeout(()=>{output.value = HightEncryption(inputT.value,inputK.value).join(" ");},1000);
     }
 })
+
+btn[1].addEventListener("click",()=>{
+    const run = document.querySelector(".run");
+    inputT.value = "";
+    inputK.value = "";
+    output.value = "";
+    headLine1.style.width = "0px";
+    headLine2.style.width = "0px";
+    tailLine1.style.width = "0px";
+    tailLine2.style.width = "0px";
+    outputLine.style.width = "0px";
+    run.style.width = `0%`;
+    percent.innerHTML = `0%`;
+})
