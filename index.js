@@ -45,10 +45,10 @@ btn[0].addEventListener("click",()=>{
     }
     else{
         headLine1.style.width = "100px";
-        headLine2.style.width = "350px";
+        headLine2.style.width = "162px";
         tailLine1.style.width = "100px";
-        tailLine2.style.width = "350px";
-        outputLine.style.width = "320px";
+        tailLine2.style.width = "163px";
+        outputLine.style.width = "169px";
     runProgress();
     setTimeout(()=>{output.value = HightEncryption(inputT.value,inputK.value).join(" ");},1000);
     }
