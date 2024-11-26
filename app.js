@@ -86,7 +86,7 @@ function DecToBin8Bit(num) {
   }
   
 
-  const whiteningKey = (MK) => {
+  export const whiteningKey = (MK) => {
     let WK = new Array(8);
     for (let i = 0; i <= 7; i++) {
       (i <= 3) ?WK[i] =  MK[i+12] : WK[i] = MK[i-4];
@@ -94,7 +94,7 @@ function DecToBin8Bit(num) {
     return WK;
   };
   
-  const subKey = (MK) => {
+  export const subKey = (MK) => {
     let SK = [];
     let s = new Array(128).fill(0);
     let d = new Array(128).fill("");
@@ -134,7 +134,7 @@ function DecToBin8Bit(num) {
         }
     return SK;
 }
-function InitialTransfomation(P, WK3, WK2, WK1, WK0) {
+export function InitialTransfomation(P, WK3, WK2, WK1, WK0) {
   let X0 = new Array(8);
   X0[0] =(P[0] + WK0) % 256;
   X0[1] = P[1];
@@ -189,7 +189,7 @@ const F1 = (x) => {
 
 
 
-function roundFunction(Xi, Xip1, SK43, SK42, SK41, SK4) {
+export function roundFunction(Xi, Xip1, SK43, SK42, SK41, SK4) {
   Xip1 = new Array(8);
   Xip1[1] = Xi[0];
   Xip1[3] = Xi[2];
@@ -202,7 +202,7 @@ function roundFunction(Xi, Xip1, SK43, SK42, SK41, SK4) {
   return Xip1;
 }
   
-function finalTransfomation(X32, C, WK7, WK6, WK5, WK4) {
+export function finalTransfomation(X32, C, WK7, WK6, WK5, WK4) {
   C[0] = (X32[1] + WK4) % 256;
   C[1] = X32[2];
   C[2] = X32[3] ^ WK5;
@@ -214,7 +214,7 @@ function finalTransfomation(X32, C, WK7, WK6, WK5, WK4) {
   return C;
 }
   
-const StringToHex = (input)=>{
+export const StringToHex = (input)=>{
   let temp = input.split("");
   temp = temp.map(item => item.charCodeAt());
   temp = temp.map(item => item.toString(16)).join(" ");
@@ -250,12 +250,12 @@ export const HightEncryption = (P, MK) => {
   // Example usage:
 // let P = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07];
 // let MK = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x41, 0x42, 0x43, 0x44,0x45,0x46];
-let P = "01234567";
-let MK = "0123456789ABCDEF";
-let C = HightEncryption(P,MK);
+// let P = "01234567";
+// let MK = "0123456789ABCDEF";
+// let C = HightEncryption(P,MK);
 // Array(8) [ '54', '2E', 'A9', '42', '32', '68', 'A9', '36' ]
-console.log(C);
-console.log(C.map(item => item.toString(16)).join(" "));
+// console.log(C);
+// console.log(C.map(item => item.toString(16)).join(" "));
 
 let temp = [];
 temp[0] = "2";

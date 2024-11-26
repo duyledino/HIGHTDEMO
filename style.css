@@ -10,7 +10,7 @@ body{
 }
 
 .container{
-    height: 100%;
+    height: fit-content;
     background-color: #161414;
     padding: 15px 20px;
 }
@@ -48,6 +48,7 @@ body{
     flex-direction: column;
     height: 80vh;
     position: relative;
+    margin-bottom: 10rem;
 }
 
 .headBox{
@@ -133,7 +134,7 @@ button{
 
 .output{
     position: absolute;
-    left: 90%;
+    right: -11.2%;
     top: 40%;
     transform: translate(-50%,-50%);
 }
@@ -149,7 +150,7 @@ input{
 .headLine1{
     position: absolute;
     bottom: 0;
-    right: -90px;
+    right: -99px;
     border-radius: 100px;
     height: 5px;
     width: 0px;
@@ -163,7 +164,7 @@ input{
 .headLine2{
     position: absolute;
     top: 163px;
-    right: 10px;
+    right: 0;
     border-radius: 100px;
     height: 5px;
     width: 0px;
@@ -183,7 +184,7 @@ input{
 .tailLine1{
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 0;
     border-radius: 100px;
     height: 5px;
     width: 0px;
@@ -197,7 +198,7 @@ input{
 .tailLine2{
     position: absolute;
     top: -100px;
-    right: 11px;
+    right: 0;
     border-radius: 100px;
     height: 5px;
     width: 0px;
@@ -219,4 +220,22 @@ input{
     background: linear-gradient(to right, #ff7e5f, #feb47b);
     transition: width 0.5s;
     transition-delay: 1s;
+}
+
+.keySchedule,.initTranform,.ForLoops,.finalTranformation{
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 20rem;
+    transition: transform 0.5s ease;
+    transform: translateX(-400px);
+}
+
+.finalTranformation{
+    margin-bottom: 20rem;
+}
+
+.show{
+    transform: translateX(0);
 }
