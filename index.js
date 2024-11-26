@@ -1,4 +1,4 @@
-import {HightEncryption} from '../HIGHT_Algorithm/app.js';
+import {HightEncryption} from './app.js';
 
 const btn = document.querySelectorAll(".btnBox button");
 const headLine1 = document.querySelector(".headLine1");
