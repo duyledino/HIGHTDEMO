@@ -118,7 +118,7 @@ function DecToBin8Bit(num) {
             d[i] += s[i + j];
         }
     }
-    debugger
+    
     // Generate subkeys
     for (let i = 0; i <= 7; i++) {
             for (let j = 0; j <= 7; j++) {
@@ -135,6 +135,7 @@ function DecToBin8Bit(num) {
     return SK;
 }
 export function InitialTransfomation(P, WK3, WK2, WK1, WK0) {
+  console.log(WK0);
   let X0 = new Array(8);
   X0[0] =(P[0] + WK0) % 256;
   X0[1] = P[1];
@@ -214,24 +215,25 @@ export function finalTransfomation(X32, C, WK7, WK6, WK5, WK4) {
   return C;
 }
   
-export const StringToHex = (input)=>{
+export const StringToDec = (input)=>{
   let temp = input.split("");
   temp = temp.map(item => item.charCodeAt());
-  temp = temp.map(item => item.toString(16)).join(" ");
+  console.log(temp);
   return temp;
 }
 
 export const HightEncryption = (P, MK) => {
-  debugger
-  P = StringToHex(P).split(" ");
+  P = StringToDec(P);
   console.log(P);
-  MK = StringToHex(MK).split(" ");
+  MK = StringToDec(MK);
   console.log(MK);
   let C = new Array(8).fill("");
   let WK = whiteningKey(MK);
+  console.log(WK[0]);
   let SK = subKey(MK);
   let X = [];
   X[0] = InitialTransfomation(P, WK[3], WK[2], WK[1], WK[0]);
+  console.log(X[0]);
   for (let i = 0; i <= 31; i++) {
     X[i + 1] = roundFunction(
       X[i],
@@ -242,13 +244,14 @@ export const HightEncryption = (P, MK) => {
       SK[4 * i]
     );
   }
+  console.log(X[31]);
   C = finalTransfomation(X[X.length - 1], C, WK[7], WK[6], WK[5], WK[4]);
-  C = C.map(item => item.toString(16));
+  C = C.map(item => item.toString(16)).join(" ");
   return C;
 };
   
   // Example usage:
-// let P = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07];
+let P = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07];
 // let MK = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x41, 0x42, 0x43, 0x44,0x45,0x46];
 // let P = "01234567";
 // let MK = "0123456789ABCDEF";
@@ -272,4 +275,6 @@ console.log("1".charCodeAt());
 console.log(0x88 === 136);
 let dec = 64;
 console.log(Number.parseInt(dec.toString(16)));
-console.log(StringToHex("abc"));
+// console.log(typeof StringToHex("abc"));
+console.log( Number.parseInt("7",16) === 0x07);
+console.log("7".charCodeAt().toString(16));

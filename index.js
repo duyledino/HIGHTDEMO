@@ -1,4 +1,4 @@
-import { HightEncryption, whiteningKey,subKey,InitialTransfomation,finalTransfomation,StringToHex,roundFunction} from "./app.js";
+import { HightEncryption, whiteningKey,subKey,InitialTransfomation,finalTransfomation,StringToDec,roundFunction} from "./app.js";
 
 const btn = document.querySelectorAll(".btnBox button");
 const headLine1 = document.querySelector(".headLine1");
@@ -17,6 +17,14 @@ const modulBox = document.querySelector(".modulBox");
 const boxes = document.querySelectorAll(".box");
 
 const sub = document.querySelectorAll(".sub");
+
+window.addEventListener("load", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+  
+});
 
 const calDistance = (box, runGene) => {
   return (modulBox.offsetWidth - runGene.offsetWidth) / 2 - box.offsetWidth;
@@ -69,7 +77,6 @@ btn[0].addEventListener("click", () => {
       inputK.value = "";
     }, 3000);
   } else {
-    debugger
     headLine1.style.width = "100px";
     headLine2.style.width = `${calDistance(boxes[0], runGene)}px`;
     tailLine1.style.width = "100px";
@@ -77,21 +84,22 @@ btn[0].addEventListener("click", () => {
     outputLine.style.width = `${calDistance(boxes[2], runGene)}px`;
     runProgress();
     setTimeout(() => {
-      output.value = HightEncryption(inputT.value, inputK.value).join(" ");
+      output.value = HightEncryption(inputT.value, inputK.value);
       const body = document.querySelector("body");
       body.style.overflow = "visible";
     }, 1000);
-    let P = StringToHex(inputT.value).split(" ");
-    let MK = StringToHex(inputK.value).split(" ");
+    let P = StringToDec(inputT.value);
+    let MK = StringToDec(inputK.value);
     let X = [];
     const ps = document.querySelectorAll("p");
-    const WK = whiteningKey(inputK.value);
+    const WK = whiteningKey(MK);
+    console.log(WK[0]);
     const SK = subKey(MK);
-    X[0] = InitialTransfomation(inputT.value,WK[3],WK[2],WK[1],WK[0]);
+    X[0] = InitialTransfomation(P,WK[3],WK[2],WK[1],WK[0]);
     console.log(InitialTransfomation(P,WK[3],WK[2],WK[1],WK[0]));
-    console.log(WK);
-    console.log(typeof P[0]);
-    console.log(MK);
+    // console.log(WK);
+    // console.log(typeof P[0]);
+    // console.log(MK);
     ps[0].innerHTML = `${whiteningKey(MK).join(" ")}`;
     ps[1].innerHTML = `SK[0] = ${subKey(MK)[0]} -> SK[${subKey(MK).length-1}] = ${subKey(MK)[subKey(MK).length-1]}`;
     ps[2].innerHTML = `X[0] = ${X[0]}`;
@@ -106,7 +114,7 @@ btn[0].addEventListener("click", () => {
         );
       }
     ps[3].innerHTML = `X[31] = ${X[31]}`;
-    ps[4].innerHTML = HightEncryption(inputT.value, inputK.value).join(" ");
+    ps[4].innerHTML = HightEncryption(inputT.value, inputK.value);
   }
 });
 
@@ -129,6 +137,8 @@ btn[1].addEventListener("click", () => {
 window.addEventListener("scroll", () => {
   sub.forEach((s) => {
     let scrollY = window.scrollY;
+    console.log(scrollY);
+    // console.log(window.innerHeight);
     // let marginTop = Number.parseInt(getComputedStyle(s).marginTop,10);
     let offsetTop = s.offsetTop;
     let height = s.offsetHeight;
