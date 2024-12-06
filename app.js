@@ -196,6 +196,7 @@ export function roundFunction(Xi, Xip1, SK43, SK42, SK41, SK4) {
   Xip1[3] = Xi[2];
   Xip1[5] = Xi[4];
   Xip1[7] = Xi[6];
+  console.log(F0(Xi[6]));
   Xip1[0] =Xi[7] ^ ((F0(Xi[6]) + SK43) % 256);
   Xip1[2] =(Xi[1] + (F1(Xi[0]) ^ SK42)) % 256;
   Xip1[4] =Xi[3] ^ ((F0(Xi[2]) + SK41) % 256);
